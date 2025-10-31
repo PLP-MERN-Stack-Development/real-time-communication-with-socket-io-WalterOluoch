@@ -12,6 +12,8 @@ export const socket = io(SOCKET_URL, {
   reconnection: true,
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
+  withCredentials: true,
+  transports: ['websocket', 'polling'],
 });
 
 // Custom hook for using socket.io
@@ -21,6 +23,7 @@ export const useSocket = () => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [typingUsers, setTypingUsers] = useState([]);
+  const [connectionError, setConnectionError] = useState(null);
 
   // Connect to socket server
   const connect = (username) => {
@@ -59,6 +62,9 @@ export const useSocket = () => {
 
     const onDisconnect = () => {
       setIsConnected(false);
+    };
+    const onConnectError = (err) => {
+      setConnectionError(err?.message || 'Connection error');
     };
 
     // Message events
@@ -117,6 +123,7 @@ export const useSocket = () => {
     socket.on('user_joined', onUserJoined);
     socket.on('user_left', onUserLeft);
     socket.on('typing_users', onTypingUsers);
+    socket.on('connect_error', onConnectError);
 
     // Clean up event listeners
     return () => {
@@ -128,6 +135,7 @@ export const useSocket = () => {
       socket.off('user_joined', onUserJoined);
       socket.off('user_left', onUserLeft);
       socket.off('typing_users', onTypingUsers);
+      socket.off('connect_error', onConnectError);
     };
   }, []);
 
@@ -143,6 +151,7 @@ export const useSocket = () => {
     sendMessage,
     sendPrivateMessage,
     setTyping,
+    connectionError,
   };
 };
 
