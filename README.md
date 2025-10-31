@@ -101,16 +101,10 @@ Socket events (client ⇄ server):
 
 ### Screenshots / GIFs
 
-Place the provided screenshot in the repository and reference it below. Suggested path:
-- `client/public/screenshots/gyming-buddies.png`
 
-Markdown reference (already set):
+<img width="1920" height="1080" alt="Screenshot (1)" src="https://github.com/user-attachments/assets/add0e298-7b9f-476b-a1d3-a34484f20f69" />
 
-![Gyming Buddies – Global Chat](client/public/screenshots/gyming-buddies.png)
 
-If you record a short GIF demo, add it as:
-
-![Gyming Buddies – Demo](client/public/screenshots/gyming-buddies-demo.gif)
 
 ---
 
